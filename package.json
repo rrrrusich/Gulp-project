@@ -1,0 +1,35 @@
+{
+	"name": "gulp_project",
+	"version": "1.3.0",
+	"description": "Сборка для работы в Gulp",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Evgenij Russkikh",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/core": "latest",
+		"@babel/preset-env": "latest",
+		"browser-sync": "latest",
+		"del": "latest",
+		"gulp": "latest",
+		"gulp-autoprefixer": "latest",
+		"gulp-babel": "latest",
+		"gulp-clean-css": "latest",
+		"gulp-file-include": "latest",
+		"gulp-fonter": "latest",
+		"gulp-group-css-media-queries": "latest",
+		"gulp-imagemin": "latest",
+		"gulp-newer": "latest",
+		"gulp-rename": "latest",
+		"gulp-sass": "latest",
+		"gulp-shorthand": "latest",
+		"gulp-sourcemaps": "latest",
+		"gulp-svg-sprite": "latest",
+		"gulp-ttf2woff": "latest",
+		"gulp-ttf2woff2": "latest",
+		"gulp-uglify-es": "latest",
+		"normalize.css": "latest"
+	}
+}

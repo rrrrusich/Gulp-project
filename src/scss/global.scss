@@ -1,0 +1,52 @@
+/*----------Обнуление---------*/
+*,
+*:before,
+*:after {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+/*----------Основной стиль---------*/
+
+::placeholder {
+	color: #666;
+}
+
+::selection {
+	background-color: $accent;
+	color: #fff;
+}
+
+input,
+textarea {
+	outline: none;
+	&:focus:required:invalid {
+		border-color: red;
+	}
+	&:required:valid {
+		border-color: green;
+	}
+}
+
+body {
+	font-family: $montserrat;
+	font-size: $fontsize;
+	min-width: 320px;
+	position: relative;
+	line-height: 1.65;
+	overflow-x: hidden;
+	color: $textcolor;
+}
+
+/*----------Стили элементов---------*/
+main {
+	display: flex;
+	justify-content: center;
+}
+
+h2 {
+	color: tomato;
+	display: inline-block;
+}
