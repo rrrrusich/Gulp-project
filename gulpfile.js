@@ -11,7 +11,7 @@ const path = {
 		resources: project_folder + "/resources/",
 	},
 	src: {
-		html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
+		html: source_folder + "/*.html",
 		css: source_folder + "/scss/style.scss",
 		js: source_folder + "/js/main.js",
 		svg: source_folder + "/images/icons/**/*.svg",
@@ -27,12 +27,13 @@ const path = {
 		img: source_folder + "/images/**/*.{jpg,jpeg,png,svg,gif,ico,webp}",
 		resources: source_folder + "/resources/**/**",
 	},
-	clean: "./" + project_folder + "/",
+	clean: ["./" + project_folder + "/", "!" + project_folder + "/{images, resources}/"],
 };
-const { src, dest } = require("gulp");
+const { src, dest, parallel, series, watch } = require("gulp");
 const gulp = require("gulp");
 const browsersync = require("browser-sync").create();
 const fileinclude = require("gulp-file-include");
+const notify = require("gulp-notify");
 const del = require("del");
 const sass = require("gulp-sass");
 const sourcemaps = require("gulp-sourcemaps");
@@ -44,6 +45,7 @@ const rename = require("gulp-rename");
 const uglify = require("gulp-uglify-es").default;
 const babel = require("gulp-babel");
 const imagemin = require("gulp-imagemin");
+const newer = require("gulp-newer");
 const ttf2woff = require("gulp-ttf2woff");
 const ttf2woff2 = require("gulp-ttf2woff2");
 const svgSprite = require("gulp-svg-sprite");
@@ -66,6 +68,7 @@ exports.server = server;
 // Resources
 const resources = () => {
 	return src(path.src.resources)
+		.pipe(newer(path.build.resources))
 		.pipe(dest(path.build.resources))
 		.pipe(browsersync.stream());
 };
@@ -89,7 +92,7 @@ const scss = () => {
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			outputStyle: "expanded",
-		}))
+		}).on('error', notify.onError()))
 		.pipe(group_media())
 		.pipe(shorthand())
 		.pipe(autoprefixer({
@@ -114,7 +117,7 @@ exports.scss = scss;
 const js = () => {
 	return src(path.src.js)
 		.pipe(fileinclude({
-			prefix: '@@',
+			prefix: '@',
 			basepath: '@file'
 		}))
 		.pipe(
@@ -137,12 +140,13 @@ exports.js = js;
 // Images
 const images = () => {
 	return src(path.src.img)
+		.pipe(newer(path.build.img))
 		.pipe(
 			imagemin({
 				progressive: true,
 				svgoPlugins: [{ removeViewBox: false }],
 				interlaced: true,
-				optimizationLevel: 3, // 0 to 7
+				optimizationLevel: 3, // от 0 до 7
 			})
 		)
 		.pipe(dest(path.build.img))
@@ -155,7 +159,7 @@ const svgSprites = () => {
 		.pipe(svgSprite({
 			mode: {
 				stack: {
-					sprite: "../sprite.svg", //sprite file name
+					sprite: "../sprite.svg", // Имя итогового файла
 					example: true,
 				},
 			},
@@ -217,20 +221,21 @@ exports.fontStyle = fontStyle;
 const clean = () => {
 	return del(path.clean);
 };
+exports.clean = clean;
 
 // Watch
 const watchFils = () => {
-	gulp.watch([path.watch.html], { usePolling: true }, html);
-	gulp.watch([path.watch.css], { usePolling: true }, scss);
-	gulp.watch([path.watch.js], { usePolling: true }, js);
-	gulp.watch([path.watch.svg], { usePolling: true }, svgSprites);
-	gulp.watch([path.watch.img], { usePolling: true }, images);
-	gulp.watch([path.watch.resources], { usePolling: true }, resources);
+	watch([path.watch.html], { usePolling: true }, html);
+	watch([path.watch.css], { usePolling: true }, scss);
+	watch([path.watch.js], { usePolling: true }, js);
+	watch([path.watch.svg], { usePolling: true }, svgSprites);
+	watch([path.watch.img], { usePolling: true }, images);
+	watch([path.watch.resources], { usePolling: true }, resources);
 };
 
-const build = gulp.series(clean, gulp.parallel(js, scss, html, svgSprites, images, fonts, resources), fontStyle);
-const watch = gulp.parallel(build, watchFils, server);
+const build = series(clean, parallel(js, scss, html, svgSprites, images, fonts, resources), fontStyle);
+const Watch = parallel(build, watchFils, server);
 
 exports.build = build;
-exports.watch = watch;
-exports.default = watch;
+exports.Watch = Watch;
+exports.default = Watch;
