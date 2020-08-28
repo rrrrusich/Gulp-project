@@ -22,6 +22,7 @@
 		"gulp-group-css-media-queries": "latest",
 		"gulp-imagemin": "latest",
 		"gulp-newer": "latest",
+		"gulp-notify": "latest",
 		"gulp-rename": "latest",
 		"gulp-sass": "latest",
 		"gulp-shorthand": "latest",
