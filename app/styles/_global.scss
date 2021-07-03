@@ -1,0 +1,80 @@
+/*----------Обнуление---------*/
+*,
+*:before,
+*:after {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+/*----------Основной стиль---------*/
+
+::placeholder {
+	color: #666;
+}
+
+::selection {
+	background-color: $accent;
+	color: $white;
+}
+
+input,
+textarea {
+	outline: none;
+	&:focus:required:invalid {
+		border-color: red;
+	}
+	&:required:valid {
+		border-color: green;
+	}
+}
+
+body {
+	font-family: $montserrat;
+	font-size: $fontsize;
+	min-width: 320px;
+	position: relative;
+	line-height: 1.65;
+	overflow-x: hidden;
+	color: $textcolor;
+	background-color: $bg-light;
+}
+
+/*----------Стили элементов---------*/
+.container {
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.btn {
+	@include adaptiv-font(24, 12);
+	font-weight: bold;
+	text-transform: uppercase;
+	color: $white;
+	background: none;
+	border: 3px solid rgba($white, 0.4);
+	overflow: hidden;
+	transition: 0.3s ease-in-out;
+	position: relative;
+	&:before {
+		content: "";
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		left: -120%;
+		transform: skewX(-45deg);
+	}
+	&:hover {
+		background-color: $accent;
+		color: $textcolor;
+		border: 3px solid rgba($white, 0.8);
+		border-color: $accent;
+		&:before {
+			left: 120%;
+			transition: 0.5s ease-in-out;
+		}
+	}
+}

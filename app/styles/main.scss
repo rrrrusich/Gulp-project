@@ -1,0 +1,15 @@
+@charset "UTF-8";
+@import "mixins";
+@import "variables";
+@import "fonts";
+@import "global";
+
+//----------Стили страницы---------//
+body {
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+	padding: 10px 20px;
+}
