@@ -1,11 +1,16 @@
 //----------Переменные---------//
 
-$maxWidth: 1920; // The maximum width of the display
-$accent: orange; // Accent Color
-$fontsize: calc(18px + 6 * ((100vw - 320px) / (1920 - 320))); // Body Font Size
-$textcolor: #243113; // Text Color
-$white: #ffffff; // Text Color White
-$bg-color: #243113; // Dark background-color
-$bg-light: #f2f2f2; // Light background-color
-$system: -apple-system, BlinkMacSystemFont, Arial, sans-serif; // System Font Family
-$montserrat: Montserrat, sans-serif; // Montserrat Font Family
+:root {
+	--accent: orange;
+	--primary-light: #f2f2f2;
+	--dark-gray: #666666;
+	--primary: #243113;
+	--primary-dark: #333333;
+	--white: #ffffff;
+
+	--system-font: -apple-system, BlinkMacSystemFont, Arial, sans-serif; // System Font Family
+	--primary-font: Montserrat, sans-serif; // Montserrat Font Family
+	--fontsize: calc(18px + 6 * ((100vw - 320px) / (1920 - 320))); // Body Font Size
+
+	--max-width: 1920; // The maximum width of the display
+}
