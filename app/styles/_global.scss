@@ -1,5 +1,4 @@
-/*----------Обнуление---------*/
-*,
+*----------Обнуление---------*/ *,
 *:before,
 *:after {
 	padding: 0;
@@ -11,12 +10,12 @@
 /*----------Основной стиль---------*/
 
 ::placeholder {
-	color: #666;
+	color: var(--dark-gray);
 }
 
 ::selection {
-	background-color: $accent;
-	color: $white;
+	background-color: var(--accent);
+	color: var(--white);
 }
 
 input,
@@ -31,14 +30,14 @@ textarea {
 }
 
 body {
-	font-family: $montserrat;
-	font-size: $fontsize;
+	font-family: var(--primary-font);
+	font-size: var(--fontsize);
 	min-width: 320px;
 	position: relative;
 	line-height: 1.65;
 	overflow-x: hidden;
-	color: $textcolor;
-	background-color: $bg-light;
+	color: var(--white);
+	background-color: var(--primary);
 }
 
 /*----------Стили элементов---------*/
@@ -52,9 +51,9 @@ body {
 	@include adaptiv-font(24, 12);
 	font-weight: bold;
 	text-transform: uppercase;
-	color: $white;
+	color: var(--white);
 	background: none;
-	border: 3px solid rgba($white, 0.4);
+	border: 3px solid rgba(var(--white), 0.4);
 	overflow: hidden;
 	transition: 0.3s ease-in-out;
 	position: relative;
@@ -68,10 +67,10 @@ body {
 		transform: skewX(-45deg);
 	}
 	&:hover {
-		background-color: $accent;
-		color: $textcolor;
-		border: 3px solid rgba($white, 0.8);
-		border-color: $accent;
+		background-color: var(--accent);
+		color: var(--primary-dark);
+		border: 3px solid rgba(var(--white), 0.8);
+		border-color: var(--accent);
 		&:before {
 			left: 120%;
 			transition: 0.5s ease-in-out;
