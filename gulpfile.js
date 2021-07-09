@@ -25,6 +25,7 @@ const path = {
 		js: `${srcFolder}/js/**/*.js`,
 		svg: `${srcFolder}/images/icons/**/*.svg`,
 		img: `${srcFolder}/images/**/*.{jpg,jpeg,png,svg,gif,ico,webp}`,
+		fonts: `${srcFolder}/fonts/*.ttf`,
 		resources: `${srcFolder}/resources/**/**`,
 	},
 	clean: [`./${prjFolder}/`, `!${prjFolder}/images/ || !${prjFolder}/resouces/`]
@@ -157,6 +158,7 @@ const watchFils = () => {
 	watch([path.watch.css], { usePolling: true }, scss);
 	watch([path.watch.js], { usePolling: true }, js);
 	watch([path.watch.img], { usePolling: true }, images);
+	watch([path.watch.fonts], { usePolling: true }, fonts);
 	watch([path.watch.resources], { usePolling: true }, resources);
 	watch(`${prjFolder}/**/*.{${fileswatch}}`, { usePolling: true }).on('change', browserSync.reload);
 };
