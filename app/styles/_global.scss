@@ -1,5 +1,4 @@
 /*----------Обнуление---------*/
-
 *,
 *:before,
 *:after {
@@ -40,9 +39,11 @@ body {
 	overflow-x: hidden;
 	color: var(--white);
 	background-color: var(--primary);
+	margin-bottom: 20px;
 }
 
 /*----------Стили элементов---------*/
+
 .container {
 	max-width: 1240px;
 	margin: 0 auto;
@@ -50,32 +51,14 @@ body {
 }
 
 .btn {
-	@include adaptiv-font(24, 12);
-	font-weight: bold;
-	text-transform: uppercase;
-	color: var(--white);
-	background: none;
-	border: 3px solid rgba(var(--white), 0.4);
-	overflow: hidden;
-	transition: 0.3s ease-in-out;
-	position: relative;
-	&:before {
-		content: "";
-		background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
-		height: 100%;
-		width: 100%;
-		position: absolute;
-		left: -120%;
-		transform: skewX(-45deg);
-	}
-	&:hover {
+	font: inherit;
+	font-size: 18px;
+	padding: 10px 20px;
+	border: 2px solid rgba(var(--white), 0.4);
+	transition: all 0.25s ease;
+	&:hover,
+	&:focus {
 		background-color: var(--accent);
-		color: var(--primary-dark);
-		border: 3px solid rgba(var(--white), 0.8);
 		border-color: var(--accent);
-		&:before {
-			left: 120%;
-			transition: 0.5s ease-in-out;
-		}
 	}
 }
